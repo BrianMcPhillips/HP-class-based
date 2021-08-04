@@ -3,7 +3,8 @@ import React, { Component } from 'react'
 export default class SearchBar extends Component {
   render() {
     const {
-      hanTerm
+      hanTerm,
+      term
     } = this.props;
     return (
       <div>

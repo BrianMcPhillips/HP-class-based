@@ -21,12 +21,13 @@ export default class SearchPage extends Component {
   render() {
     const { characterData, term } = this.state;
     const filteredChar = characterData.filter(character => 
-      character.name === 'All' ? true : character.name === term
+      term === 'All' ? true : character.name.includes(term)
     );
     return (
       <div>
         <SearchBar 
-          hanTerm={this.handleTerm}/>
+          hanTerm={this.handleTerm}
+          term={term}/>
         <CharacterList data={filteredChar}/>
       </div>
     )
