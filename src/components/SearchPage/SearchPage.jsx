@@ -2,11 +2,14 @@ import React, { Component } from 'react';
 import request from 'superagent';
 import CharacterList from './ChracterList/CharacterList';
 import SearchBar from './ChracterList/SearchBar/SearchBar';
+import options from '../../assets/data';
 
 export default class SearchPage extends Component {
   state = {
     characterData: [],
-    term: 'All'
+    option: 'all',
+    term: ''
+    
   }
   componentDidMount = async() => {
     const data = await request.get('http://hp-api.herokuapp.com/api/characters');
@@ -18,16 +21,21 @@ export default class SearchPage extends Component {
   handleTerm = (e) => {
     this.setState({ term: e.target.value })
   }
+  handleOption = (e) => {
+    this.setState({ option: e.target.value })
+  }
   render() {
-    const { characterData, term } = this.state;
+    const { characterData, term, option } = this.state;
     const filteredChar = characterData.filter(character => 
-      term === 'All' ? true : character.name.includes(term)
+      option === 'all' ? true : option !== 'all' && character[option].includes(term)
     );
     return (
       <div>
         <SearchBar 
           hanTerm={this.handleTerm}
-          term={term}/>
+          hanOption={this.handleOption}
+          term={term}
+          options={options}/>
         <CharacterList data={filteredChar}/>
       </div>
     )
