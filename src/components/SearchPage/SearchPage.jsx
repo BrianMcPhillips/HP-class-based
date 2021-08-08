@@ -1,3 +1,4 @@
+// Import Libraries and Components
 import React, { Component } from 'react';
 import request from 'superagent';
 import CharacterList from './ChracterList/CharacterList';
